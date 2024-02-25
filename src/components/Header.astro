@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets";
+import menuIcon from "../../public/icons/burger.svg";
+import closeIcon from "../../public/icons/close.svg";
+import { SITE_TITLE } from "../consts";
+import HeaderLink from "./HeaderLink.astro";
+---
+
+<header x-data="{ open: false }" class="m-0 px-[1em] bg-white shadow">
+	<nav class="flex items-center justify-between py-[20px] md:py-0">
+		<h2
+			class="font-[500] text-[20px] md:text-[42px] leading-[170%] tracking-[12%] uppercase pt-font m-0"
+		>
+			<a href="/">{SITE_TITLE}</a>
+		</h2>
+
+		<div @click="open = !open" class="md:hidden">
+			<Image
+				src={menuIcon}
+				alt="Menu"
+				class="rounded-none cursor-pointer"
+			/>
+		</div>
+		<div class="hidden md:block uppercase">
+			<HeaderLink href="/">Blog</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/links">Links</HeaderLink>
+			<HeaderLink href="/projects">Projects</HeaderLink>
+		</div>
+		<div
+			class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center space-y-6 md:space-y-0 md:relative md:flex-row md:space-x-10 md:bg-transparent md:z-auto md:items-center md:justify-end transition-all duration-500 uppercase"
+			x-show="open"
+			@click.away="open = false"
+			x-transition:enter="transition ease-out duration-300"
+			x-transition:enter-start="opacity-0 scale-95"
+			x-transition:enter-end="opacity-100 scale-100"
+			x-transition:leave="transition ease-in duration-300"
+			x-transition:leave-start="opacity-100 scale-100"
+			x-transition:leave-end="opacity-0 scale-95"
+			style="display: none;"
+		>
+			<button
+				@click="open = false"
+				class="absolute top-0 right-0 mt-4 mr-4 md:hidden"
+			>
+				<Image
+					src={closeIcon}
+					alt="close button"
+					class="rounded-none cursor-pointer"
+				/>
+			</button>
+			<HeaderLink href="/">Blog</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/links">Links</HeaderLink>
+			<HeaderLink href="/projects">Projects</HeaderLink>
+		</div>
+	</nav>
+</header>
+
+<style>
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+	}
+	nav a {
+		padding: 40px 0.5em;
+		color: #000;
+		border-bottom: 2px solid transparent;
+		text-decoration: none;
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: #000;
+	}
+	.social-links,
+	.social-links a {
+		display: flex;
+	}
+</style>

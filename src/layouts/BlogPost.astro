@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import RecomendedBlogs from "../components/RecomendedBlogs.astro";
+
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="max-w-[854px] py-8">
+			<article>
+				<div>
+					<h1
+						class="pt-font font-[700] leading-[100%] text-[54px] text-center"
+					>
+						{title}
+					</h1>
+					<div class="my-8">
+						<p
+							class="noto-font font-[400] text-[20px] leading-[170%] text-center"
+						>
+							{description}
+						</p>
+					</div>
+					<!-- <div class="date">
+						<FormattedDate date={pubDate} />
+						{
+							updatedDate && (
+								<div class="last-updated-on">
+									Last updated on{" "}
+									<FormattedDate date={updatedDate} />
+								</div>
+							)
+						}
+					</div> -->
+				</div>
+				<div class="hero-image">
+					{
+						heroImage && (
+							<img
+								height={510}
+								src={heroImage}
+								alt=""
+								class="w-full aspect-video object-cover"
+							/>
+						)
+					}
+				</div>
+				<div class="prose">
+					<hr class="border-2 border-black my-4" />
+					<slot />
+				</div>
+			</article>
+
+			<hr class="border-2 border-black my-[74px]" />
+
+			<article class="container mx-auto">
+				<div>
+					<h1 class="font-[700] text-[44px] text-center pt-font my-4">
+						What to read next
+					</h1>
+					<!-- toDo 6 случайных постов -->
+					<RecomendedBlogs />
+				</div>
+
+				<div
+					class="border border-black border-t-8 md:w-[640px] mx-auto my-[100px] p-4 md:p-[60px]"
+				>
+					<div class="mb-9">
+						<h1
+							class="pt-font font-[700] text-[36px] leading-[100%] md:leading-[28px] text-center mb-3"
+						>
+							Sign up for the newsletter
+						</h1>
+
+						<p
+							class="noto-font font-[400] text-[20px] leading-[28px] text-center"
+						>
+							If you want relevant updates occasionally, sign up
+							for the private newsletter. Your email is never
+							shared.
+						</p>
+					</div>
+
+					<form class="flex flex-row w-full">
+						<input
+							type="email"
+							placeholder="Enter your email..."
+							class="border border-black px-4 py-2 w-full placeholder:text-black font-[400] text-[20px]"
+							required
+						/>
+						<button
+							type="submit"
+							class="bg-black text-white px-4 py-2 w-40"
+							>SIGN UP</button
+						>
+					</form>
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

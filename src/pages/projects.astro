@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/BlogPost.astro";
+
+const projectArray = [
+	{
+		url: "https://ujjo-hot-sauce.vercel.app/",
+		title: "Ujjo Hot Sauce",
+		description:
+			"The spicy touch to your culinary creations. Check out this hot sauce portfolio!",
+	},
+	{
+		url: "https://inwood-pi.vercel.app/",
+		title: "InWood",
+		description: "InWood description",
+	},
+	{
+		url: "https://eugenepokalyuk.github.io/react-helper-personal-account/",
+		title: "Профиль дизайнера",
+		description: "description",
+	},
+	{
+		url: "https://become-designer.vercel.app/",
+		title: "Как стать дизайнером продукта",
+		description: "description",
+	},
+	{
+		url: "https://eugenepokalyuk.github.io/react-pet-store/",
+		title: "Интернет магазин",
+		description: "description",
+	},
+	{
+		url: "https://eugenepokalyuk.github.io/react-music-collection/",
+		title: "Сайт музыкальный",
+		description: "description",
+	},
+	{
+		url: "https://eugenepokalyuk.github.io/react-about/",
+		title: "Сайт обо мне",
+		description: "description",
+	},
+	{
+		url: "https://eugenepokalyuk.github.io/react-burger/",
+		title: "Галактическая бургерная",
+		description: "description",
+	},
+	{
+		url: "https://eugenepokalyuk.github.io/react-freetogame/",
+		title: "Онлайн игры",
+		description: "description",
+	},
+];
+---
+
+<Layout
+	title="Projects"
+	description="Discover my portfolio of work and personal projects"
+	pubDate={new Date("August 08 2021")}
+	heroImage="/blog-placeholder-projects.webp"
+>
+	<p>
+		My project portfolio showcases a diverse range of work from software
+		development to creative endeavors. Each project is a testament to my
+		passion for learning, building, and contributing to the community. Dive
+		in to see the problems I've tackled and the solutions I've crafted.
+	</p>
+
+	<div class="px-4">
+		<div class="grid grid-cols-1 md:grid-cols-1 gap-4 items-start">
+			{
+				projectArray.map((project, index) => (
+					<div class="overflow-hidden shadow-lg rounded-lg h-90 w-full md:w-full cursor-pointer m-auto">
+						<a
+							href={project.url}
+							target="_blank"
+							class="w-full block h-full"
+						>
+							<iframe
+								src={project.url}
+								frameborder="0"
+								class="min-h-full min-w-full"
+								title={project.title}
+							/>
+
+							<div class="bg-white dark:bg-gray-800 w-full p-4">
+								<p class="text-gray-800 dark:text-white text-xl font-medium mb-2">
+									{project.title}
+								</p>
+								<p class="text-gray-400 dark:text-gray-300 font-light text-md">
+									{project.description}
+								</p>
+							</div>
+						</a>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<style>
+		iframe {
+			height: 500px;
+		}
+	</style>
+</Layout>

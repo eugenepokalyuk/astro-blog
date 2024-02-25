@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+);
+---
+
+<ul class="flex flex-wrap !list-none m-0 p-0">
+    {
+        posts.map((post, index) => (
+            <li
+                class={`p-2 ${index === 0 ? "w-full text-center mb-4" : "w-1/2"}`}
+            >
+                <a href={`/blog/${post.slug}/`} class="block cursor-pointer">
+                    <img
+                        height={360}
+                        src={post.data.heroImage}
+                        alt=""
+                        class={`${index === 0 ? "" : "mb-2"} w-full rounded-xl transition-all duration-200 ease-in hover:shadow-lg transition-all duration-200 ease-in hover:scale-[105%] object-cover aspect-video`}
+                    />
+                </a>
+
+                <h4
+                    class={`${index === 0 ? "font-[700] text-[54px] leading-[100%] pt-font mt-[44px]" : "font-[500] text-[22px] leading-[120%]"} text-center m-0 text-black line-none transition-colors duration-200 ease-in hover:text-accent`}
+                >
+                    {post.data.title}
+                </h4>
+
+                <p
+                    class={`m-0 text-gray-500 transition-colors duration-200 ease-in hover:text-accent text-center ${index === 0 && "mt-[32px]"}`}
+                >
+                    <FormattedDate date={post.data.pubDate} />
+                </p>
+
+                {index === 0 && (
+                    <>
+                        <hr class="border-2 border-black my-8" />
+                        <h2 class="font-[700] text-[44px] leading-[100%] pt-font mt-[44px]">
+                            All articles
+                        </h2>
+                    </>
+                )}
+            </li>
+        ))
+    }
+</ul>
