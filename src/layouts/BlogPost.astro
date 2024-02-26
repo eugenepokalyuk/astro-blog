@@ -24,24 +24,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					>
 						{title}
 					</h1>
-					<div class="my-8">
+					<div class="my-8 mx-auto md:max-w-[592px]">
 						<p
 							class="noto-font font-[400] text-[20px] leading-[170%] text-center"
 						>
 							{description}
 						</p>
 					</div>
-					<!-- <div class="date">
-						<FormattedDate date={pubDate} />
-						{
-							updatedDate && (
-								<div class="last-updated-on">
-									Last updated on{" "}
-									<FormattedDate date={updatedDate} />
-								</div>
-							)
-						}
-					</div> -->
 				</div>
 				<div class="hero-image">
 					{
@@ -68,7 +57,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					<h1 class="font-[700] text-[44px] text-center pt-font my-4">
 						What to read next
 					</h1>
-					<!-- toDo 6 случайных постов -->
 					<RecomendedBlogs />
 				</div>
 
@@ -95,7 +83,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<input
 							type="email"
 							placeholder="Enter your email..."
-							class="border border-black px-4 py-2 w-full placeholder:text-black font-[400] text-[20px]"
+							class="border border-black px-4 py-2 w-full placeholder:text-black font-[400] text-[20px] rounded-none"
 							required
 						/>
 						<button
